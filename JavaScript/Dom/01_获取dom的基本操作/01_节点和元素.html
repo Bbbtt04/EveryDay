@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_节点和元素</title>
+</head>
+
+<body>
+  <!-- input标签的value属性值是一个节点，而不是一个元素 -->
+  <input type="text">
+  <input type="button" value="search">
+
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+
+
+  <script>
+    let bodyEl = document.body
+
+    let nodes = bodyEl.childNodes
+    let elements = bodyEl.children
+    console.log(nodes, elements);
+
+    let bodyFirstNode = bodyEl.firstChild
+    let bodyFirstElement = bodyEl.firstElementChild
+    console.log(bodyFirstNode, bodyFirstElement);
+  </script>
+</body>
+
+</html>
