@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECharts</title>
+
+  <script src="https://cdn.staticfile.org/echarts/5.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+  <div id="main" style="height: 400px;width: 600px;"></div>
+
+  <script>
+    window.onload = function () {
+      let myChart = echarts.init(document.getElementById('main'))
+
+      let option = {
+        backgroundColor: "rgba(0,1,100,0.3)",
+        xAxis: {
+          show: false,
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+          name: '销量',
+          type: 'pie',
+          // data: [5, 20, 36, 10, 10, 20],
+          data: [
+            { value: 5, name: "衬衫" },
+            { value: 20, name: "羊毛衫" },
+            { value: 36, name: "雪纺衫" },
+            { value: 10, name: "裤子" },
+            { value: 10, name: "高跟鞋" },
+            { value: 20, name: "袜子" }
+          ],
+          label: {
+            show: true,
+            fontSize: 16,
+          },
+          center: ["50%", "50%"],
+          radius: ["30%", "80%"],
+          roseType: "area",
+        }],
+        grid: {
+          show: true,
+          // backgroundColor: `rgba(0,180,100,0.3)`,
+        },
+        legend: {
+          show: true,
+          icon: "circle",
+          // formatter: `wbt- {name}`
+        },
+        tooltip: {
+          show: true,
+          formatter: '<div>123</div>'
+        }
+      };
+
+      myChart.setOption(option)
+    }
+  </script>
+</body>
+
+</html>

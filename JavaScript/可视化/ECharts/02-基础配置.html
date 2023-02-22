@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECharts</title>
+
+  <script src="https://cdn.staticfile.org/echarts/5.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+  <div id="main" style="height: 400px;width: 600px;"></div>
+
+  <script>
+    window.onload = function () {
+      let myChart = echarts.init(document.getElementById('main'))
+
+      let option = {
+        backgroundColor: "rgba(0,1,100,0.3)",
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+          // show: false 是否显示
+          name: "x轴坐标",
+          type: "category",
+          axisLine: { // 坐标轴轴线
+            show: true,
+            lineStyle: {
+              color: 'pink',
+              width: 3
+            }
+          },
+          axisLabel: { // 坐标轴刻度标签
+            show: true,
+            color: "green",
+            fontSize: 16
+          },
+          axisTick: { // 坐标轴刻度相关
+            show: true,
+            length: 10,
+            lineStyle: {
+              color: "purple",
+              width: 3
+            }
+          },
+          splitLine: { // 坐标轴 在grid区域中的线
+            show: true,
+            lineStyle: {
+              width: 0.4,
+              color: "blue"
+            }
+          }
+        },
+        yAxis: {
+          type: "value",
+          name: "数量 / 件",
+          axisTick: {
+            show: true
+          },
+          axisLabel: {
+            fontSize: 14,
+            color: "lightblue"
+          }
+        },
+        series: [{
+          name: '销量',
+          type: 'line',
+          data: [5, 20, 40, 10, 10, 20]
+        }],
+        grid: {
+          show: true,
+          backgroundColor: `rgba(0,180,100,0.3)`,
+        }
+      };
+
+      myChart.setOption(option)
+    }
+  </script>
+</body>
+
+</html>

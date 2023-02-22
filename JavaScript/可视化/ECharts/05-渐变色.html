@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECharts</title>
+
+  <script src="https://cdn.staticfile.org/echarts/5.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+  <div id="main" style="height: 400px;width: 600px;"></div>
+
+  <script>
+    window.onload = function () {
+      let myChart = echarts.init(document.getElementById('main'))
+
+      let option = {
+        backgroundColor: "rgba(0,1,100,0.3)",
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+          name: '销量',
+          type: 'line',
+          data: [5, 20, 36, 10, 10, 20],
+          itemStyle: {
+            color: {
+              type: "linear",
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{ offset: 0, color: "red" }, { offset: 1, color: "blue" }]
+            }
+          }
+        }],
+        grid: {
+          show: true,
+          backgroundColor: `rgba(0,180,100,0.3)`,
+        }
+      };
+
+      myChart.setOption(option)
+    }
+  </script>
+</body>
+
+</html>
