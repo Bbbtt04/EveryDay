@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url(../images/grid.png);
+    }
+
+    canvas {
+      width: 800px;
+      border: 3px solid lightpink;
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    window.onload = function () {
+      const canvas = document.getElementById('canvas');
+      // 获取上下文
+      const ctx = canvas.getContext('2d');
+
+      let sun = new Image()
+      sun.src = '../images/canvas_sun.png'
+
+      let earth = new Image()
+      earth.src = '../images/canvas_earth.png'
+
+      let moon = new Image()
+      moon.src = '../images/canvas_moon.png'
+
+      requestAnimationFrame(draw)
+
+      function draw() {
+        let second = new Date().getSeconds()
+
+        ctx.clearRect(0, 0, 300, 300)
+        ctx.save()
+
+        // 开始绘图
+        ctx.save()
+        ctx.drawImage(sun, 0, 0, 100, 100)
+
+        ctx.translate(50, 50)
+        ctx.beginPath()
+        ctx.arc(0, 0, 40, 0, Math.PI * 2)
+        ctx.lineWidth = 0.5
+        ctx.strokeStyle = 'rgba(0,151,222,0.5)'
+        ctx.stroke()
+        ctx.closePath()
+
+        ctx.save()
+        ctx.translate(35, 0)
+        ctx.rotate(Math.PI * 2 / 60 * second)
+        ctx.drawImage(earth, 0, 0, 10, 10)
+
+        ctx.save()
+        ctx.translate(3, 13)
+        ctx.drawImage(moon, 0, 0)
+        ctx.restore()
+
+
+        ctx.restore()
+
+        ctx.restore()
+        requestAnimationFrame(draw)
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>

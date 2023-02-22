@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      width: 500px;
+      background-color: lightgoldenrodyellow;
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    // 获取上下文
+    const ctx = canvas.getContext('2d');
+    /* 
+      1.首先创建路径起点
+      2.然后使用画图命令去画
+      3.路径闭合（closePath）
+      4.路径生成后，可以通过stroke或fill
+    */
+    // 全局透明度
+    ctx.globalAlpha = 0.2
+
+    ctx.beginPath()
+    ctx.arc(20, 50, 20, 0, Math.PI * 2, false)
+    ctx.closePath()
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.arc(100, 50, 10, 0, Math.PI, true)
+    ctx.strokeStyle = '#123121'
+    ctx.stroke()
+
+  </script>
+</body>
+
+</html>
