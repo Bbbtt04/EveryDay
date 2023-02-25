@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>照相机</title>
+  <script type="text/javascript" src="../lib/three.js"></script>
+  <script>
+    function init() {
+      // 初始化渲染器
+      let renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById('mainCanvas')
+      })
+      renderer.setClearColor(0x0000) // 设置背景颜色
+      // 场景 Scene
+      let scene = new THREE.Scene()
+
+      var camera = new THREE.OrthographicCamera(-2, 2, 1.5, -1.5, 1, 10); // 正交投影
+      camera.position.set(4, -3, 4) // 设置相机位置
+
+      /* lookAt接收一个THREE.Vector3 实例 */
+      camera.lookAt(new THREE.Vector3(0, 0, 0)) // 设置相机方向
+      scene.add(camera) // 将相机添加到场景中
+
+      var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 1, 1), // 立方体
+        new THREE.MeshBasicMaterial({  // 材质
+          color: 0xff0000,
+          wireframe: true // 线框模式
+        })
+      );
+      scene.add(cube);
+
+      renderer.render(scene, camera)
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <canvas id="mainCanvas" width="400px" height="400px"></canvas>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+  <script type="text/javascript" src="../lib/three.js"></script>
+
+  <script type="text/javascript">
+    function init() {
+      let renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById('mainCanvas')
+      })
+      renderer.setClearColor(0x0000)
+
+      let scene = new THREE.Scene()
+      let camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100)
+      camera.position.set(25, 25, 25)
+      camera.lookAt(new THREE.Vector3(0, 0, 0))
+      scene.add(camera)
+
+      let material = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        wireframe: true
+      })
+
+      // 坐标轴
+      drawAxes(scene)
+      // drawCube(scene, material) // THREE.CubeGeometry(w,h,d,ws,hs,ds)
+      // drawPlane(scene, material)
+      // drawSphere(scene, material)
+      // drawCircle(scene, material)
+      // drawCylinder(scene, material)
+      // drawTorus(scene, material)
+      renderer.render(scene, camera)
+    }
+    /* 正方体 */
+    function drawCube(scene, material) {
+      let cube = new THREE.Mesh(new THREE.CubeGeometry(1, 2, 3, 2, 2, 3), material)
+      scene.add(cube)
+    }
+    /* plane */
+    function drawPlane(scene, material) {
+      let plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), material)
+      scene.add(plane)
+    }
+    /* sphere */
+    function drawSphere(scene, material) {
+      let sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6, 0, Math.PI, Math.PI / 6, Math.PI / 3), material)
+      scene.add(sphere)
+    }
+    /* Circle */
+    function drawCircle(scene, material) {
+      let circle = new THREE.Mesh(new THREE.CircleGeometry(3, 10, 0, Math.PI), material)
+      scene.add(circle)
+    }
+    /* Cylinder */
+    function drawCylinder(scene, material) {
+      let cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2, 3, 4, 10, 3), material)
+      scene.add(cylinder)
+    }
+    /* Torus */
+    function drawTorus(scene, material) {
+      let torus = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 3, 10, Math.PI), material)
+      scene.add(torus)
+    }
+
+    function drawAxes(scene) {
+      // x-axis
+      var xGeo = new THREE.Geometry();
+      xGeo.vertices.push(new THREE.Vector3(0, 0, 0));
+      xGeo.vertices.push(new THREE.Vector3(3, 0, 0));
+      var xMat = new THREE.LineBasicMaterial({
+        color: 0xff0000
+      });
+      var xAxis = new THREE.Line(xGeo, xMat);
+      scene.add(xAxis);
+
+      // y-axis
+      var yGeo = new THREE.Geometry();
+      yGeo.vertices.push(new THREE.Vector3(0, 0, 0));
+      yGeo.vertices.push(new THREE.Vector3(0, 3, 0));
+      var yMat = new THREE.LineBasicMaterial({
+        color: 0x00ff00
+      });
+      var yAxis = new THREE.Line(yGeo, yMat);
+      scene.add(yAxis);
+
+      // z-axis
+      var zGeo = new THREE.Geometry();
+      zGeo.vertices.push(new THREE.Vector3(0, 0, 0));
+      zGeo.vertices.push(new THREE.Vector3(0, 0, 3));
+      var zMat = new THREE.LineBasicMaterial({
+        color: 0x00ccff
+      });
+      var zAxis = new THREE.Line(zGeo, zMat);
+      scene.add(zAxis);
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+</body>
+
+</html>

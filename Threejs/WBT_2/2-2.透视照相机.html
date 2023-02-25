@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>透视</title>
+  <script type="text/javascript" src="../lib/three.js"></script>
+  <script>
+    function init() {
+      // 初始化渲染器
+      let renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById('mainCanvas')
+      })
+      renderer.setClearColor(0x0000) // 设置背景颜色
+
+      let scene = new THREE.Scene()
+
+      let camera = new THREE.PerspectiveCamera(45, 400 / 300, 1, 10) // 透视投影
+      camera.position.set(0, 0, 5)
+      scene.add(camera)
+
+      var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 1, 1),
+        new THREE.MeshBasicMaterial({
+          color: 0xff0000,
+          wireframe: true
+        })
+      );
+      scene.add(cube)
+
+      renderer.render(scene, camera)
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+</body>
+
+</html>
