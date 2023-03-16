@@ -10,7 +10,6 @@ function debounce(fn) {
   }
 }
 
-
 function throttle(fn) {
   let timer = null
   return function () {
@@ -19,6 +18,6 @@ function throttle(fn) {
     timer = setTimeout(() => {
       fn.apply(this, arguments)
       timer = null
-    })
+    }, 1000)
   }
 }
