@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let data = {
+      name: "wbt",
+      age: 19,
+      school: "sxau"
+    }
+
+    const bucket = new WeakMap()
+    // 全局变量：存储当前激活的 effect 函数
+    let activeEffect
+    function effect(fn) {
+      activeEffect = fn
+      fn()
+    }
+
+    const obj = new Proxy(data, {
+      get(target, key) {
+        track(target, key)
+
+        return target[key]
+      },
+      set(target, key, newValue) {
+        // 设置属性值
+        target[key] = newValue
+        trigger(target, key)
+      }
+    })
+
+    function track(target, key) {
+      if (!activeEffect)
+        return target[key]
+      let depsMap = bucket.get(target)
+      if (!depsMap) {
+        bucket.set(target, (depsMap = new Map()))
+      }
+      let deps = depsMap.get(key)
+      if (!deps) {
+        depsMap.set(key, (deps = new Set()))
+      }
+      deps.add(activeEffect)
+    }
+
+    function trigger(target, key) {
+      const depsMap = bucket.get(target)
+      if (!depsMap) return
+      const effects = depsMap.get(key)
+      effects && effects.forEach(fn => fn())
+    }
+    /*
+      WeakMap : target -> Map
+      Map : key -> Set
+    */
+  </script>
+</body>
+
+</html>

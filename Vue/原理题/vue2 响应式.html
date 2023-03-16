@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" id="ipt" />
+    <p></p>
+  </div>
+
+  <script>
+    let data = {
+      name: "wbt",
+      age: 19,
+      school: "sxau"
+    }
+    observer(data)
+    function observer(target) {
+      if (!target) return
+
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+    }
+    function defineReactive(target, key, value) {
+      if (typeof value === 'object') observer(value)
+
+      Object.defineProperty(target, key, {
+        get() {
+          return value
+        },
+        set(newValue) {
+          if (newValue !== value) {
+            value = newValue
+            console.log("更新视图");
+          }
+        }
+      })
+    }
+    console.log(data);
+    const op = document.querySelector('p')
+    op.innerHTML = data.name
+
+    setTimeout(() => {
+      data.name = "更改wbt"
+    }, 1000)
+  </script>
+</body>
+
+</html>
