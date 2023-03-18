@@ -8,10 +8,13 @@ function Son(name, age) {
   Parent.call(this, name)
   this.age = age
 }
+// Object.create ：c创建一个对象，对象的__proto__指向参数对象
+Son.prototype = Object.create(Parent.prototype)
+Son.prototype.constructor = Son
+
 Son.prototype.getAge = function () {
   return this.age
 }
-Son.prototype.__proto__ = Object.create(Parent.prototype)
 
 const son = new Son('wbt', 20)
 
