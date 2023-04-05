@@ -4,8 +4,13 @@ const REJECTED = 'rejected'
 
 class myPromise {
   constructor(executor) {
-    executor(this.resolve, this.reject)
+    try {
+      executor(this.resolve, this.reject)
+    } catch (error) {
+      this.reject(error)
+    }
   }
+
   status = PENDING;
   value = null;
   reason = null;
@@ -33,14 +38,39 @@ class myPromise {
   }
 
   then(onFulfilled, onRejected) {
+    const realOnFulfilled = typeof onFulfilled === 'function'
+      ? onFulfilled
+      : value => value
+    const realOnRejected = typeof onRejected === 'function'
+      ? onRejected
+      : reason => { throw reason }
+
     const promise2 = new myPromise((resolve, reject) => {
-      if (this.status === FULFILLED) {
+      const fulfilledMicrotask = () => {
         queueMicrotask(() => {
-          const x = onFulfilled(this.value)
-          resolvePromise(promise2, x, resolve, reject)
+          try {
+            const x = realOnFulfilled(this.value)
+            resolvePromise(promise2, x, resolve, reject)
+          } catch (error) {
+            reject(error)
+          }
         })
+      }
+      const rejectedMicrotask = () => {
+        queueMicrotask(() => {
+          try {
+            const x = realOnRejected(this.reason)
+            rejectedMicrotask(promise2, x, resolve, reject)
+          } catch (error) {
+            reject(error)
+          }
+        })
+      }
+
+      if (this.status === FULFILLED) {
+        fulfilledMicrotask()
       } else if (this.status === REJECTED) {
-        onRejected(this.reason)
+        rejectedMicrotask()
       } else if (this.status === PENDING) {
         this.onFulfilledCallbacks.push(onFulfilled)
         this.onRejectedCallbacks.push(onRejected)
@@ -49,6 +79,20 @@ class myPromise {
     return promise2
   }
 
+  static resolve(parameter) {
+    if (parameter instanceof myPromise) {
+      return parameter
+    }
+    return new myPromise(resolve => {
+      resolve(parameter)
+    })
+  }
+
+  static reject(reason) {
+    return new myPromise((resolve, reject) => {
+      reject(reason)
+    })
+  }
 }
 function resolvePromise(promise2, x, resolve, reject) {
   if (promise2 === x) {
