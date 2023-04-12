@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>three</title>
+</head>
+<body>
+<canvas height="300px" id="mainCanvas" width="400px"></canvas>
+<button id="dropBtn" onclick="drop()">Drop</button>
+<script type="module">
+    import * as THREE from './node_modules/three/build/three.module.js'
+
+    let scene = null;
+    let camera = null;
+    let renderer = null;
+
+    let id = null;
+
+    let ballMesh = null;
+    let ballRadius = 0.5;
+
+    let isMoving = false;
+    let maxHeight = 5;
+
+    let v = 0;
+    let a = -0.01;
+
+    function init() {
+        renderer = new THREE.WebGLRenderer({
+            canvas: document.getElementById("mainCanvas")
+        })
+        scene = new THREE.Scene();
+
+        camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+
+        camera.position.set(5, 5, 20);
+        camera.lookAt(new THREE.Vector3(0, 3, 0));
+        scene.add(camera);
+        // ball
+        ballMesh = new THREE.Mesh(new THREE.SphereGeometry(ballRadius, 16, 8), new THREE.MeshLambertMaterial({
+            color: 0xffff00
+        }));
+        ballMesh.position.x = 0;
+        ballMesh.position.y = 0;
+        scene.add(ballMesh);
+
+        //light
+        let light = new THREE.DirectionalLight(0xffffff);
+        light.position.set(10, 10, 15);
+        scene.add(light);
+
+        id = requestAnimationFrame(draw);
+    }
+
+    function draw() {
+        renderer.render(scene, camera);
+
+        if(isMoving) {
+            ballMesh.position.y += v;
+            v += a;
+
+            if(ballMesh.position.y <= ballRadius) {
+                v = -v * 0.9;
+            }
+            if(Math.abs(v) < 0.001) {
+                isMoving = false;
+                ballMesh.position.y = ballRadius;
+            }
+        }
+
+        id = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+        if (id !== null) {
+            cancelAnimationFrame(id);
+            id = null;
+        }
+    }
+
+    function drop() {
+        isMoving = true;
+        ballMesh.position.y = maxHeight;
+        v = 0;
+    }
+
+    window.onload = () => {
+        init();
+        drop();
+    }
+</script>
+</body>
+</html>

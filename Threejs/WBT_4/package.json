@@ -1,0 +1,9 @@
+{
+  "name": "WBT_4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.151.3"
+  }
+}
