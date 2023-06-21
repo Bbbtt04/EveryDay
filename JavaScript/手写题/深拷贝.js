@@ -1,24 +1,22 @@
-let obj = {
-  a: 1,
-  b: 2,
-  c: {
-    c: 1,
-    d: 2
+let obj1 = {
+};
+let obj2 = {
+  b: obj1
+};
+obj1.a = deepClone(obj2);
+console.log(obj1);
+function deepClone(obj,map = new WeakMap()) {
+  if(typeof obj !== 'object' || obj === null) {
+    return obj;
   }
-}
-
-function deepClone(obj) {
-  let clone = Array.isArray(obj) ? [] : {}
-  for (let key of Object.keys(obj)) {
-    if (typeof obj[key] === 'object') {
-      clone[key] = deepClone(obj[key])
-    } else {
-      clone[key] = obj[key]
+  let clone = Array.isArray(obj) ? [] : {};
+  if(map.has(obj)) return map.get(obj);
+  for(let key in obj) {
+    if(obj.hasOwnProperty(key)) {
+      map.set(obj,obj[key]);
+      clone[key] = deepClone(obj[key]);
     }
   }
-  return clone
+  return clone;
 }
 
-let clone = deepClone(obj)
-clone.a = 1000000000
-console.log(obj);
