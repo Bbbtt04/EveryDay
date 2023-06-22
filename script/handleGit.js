@@ -1,5 +1,6 @@
 const simpleGit = require('simple-git')
 let repo_status = null
+const getCurrentDay = require('./getCurrentDay')
 
 const options = {
     baseDir: process.cwd(), // 设置git的工作目录
@@ -18,7 +19,7 @@ function handleGit() {
                 addAll()
             }
             if(repo_status.modified.length > 0) {
-                commit(`update ${repo_status.modified.length} files`)
+                commit(`${getCurrentDay} 更新了${repo_status.modified.length}个文件`)
             }
             if(repo_status.ahead > 0) {
                 push()
