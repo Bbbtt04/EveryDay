@@ -20,6 +20,9 @@ function handleGit() {
             if(repo_status.modified.length > 0) {
                 commit(`update ${repo_status.modified.length} files`)
             }
+            if(repo_status.ahead > 0) {
+                push()
+            }
         })
 }
 
@@ -32,6 +35,11 @@ function addAll() {
 function commit(msg) {
     git.commit(msg, (err, result) => {
         console.log('commit')
+    })
+}
+function push() {
+    git.push('origin', 'master', (err, result) => {
+        console.log('push')
     })
 }
 
