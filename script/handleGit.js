@@ -13,17 +13,25 @@ function handleGit() {
     // 1. 检查是否安装git
     git
         .status(null, (err, status) => {
-            // console.log('status', status)
             repo_status = status
             if(repo_status.not_added.length > 0) {
                 addAll()
+            }
+            if(repo_status.modified.length > 0) {
+                commit(`update ${repo_status.modified.length} files`)
             }
         })
 }
 
 function addAll() {
     git.add('./*', (err, result) => {
-        console.log('addAll', result)
+        console.log('addAll')
+    })
+}
+
+function commit(msg) {
+    git.commit(msg, (err, result) => {
+        console.log('commit')
     })
 }
 
