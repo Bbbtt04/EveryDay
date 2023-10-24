@@ -1,0 +1,50 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\23937\AppData\Local\node\corepack\yarn\1.22.19\bin\yarn.js add loadshEs
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\Program Files (x86)\VM虚拟\bin\;%;ystemRoot%\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk1.8.0_311;";C:\Program Files\Java\jdk1.8.0_311\bin;C:\Program Files\Java\jdk1.8.0_311\jre\bin;";C:\Program Files\Java\jdk1.8.0_311\bin;C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\dotnet\;C:\WINDOWS\system32;C:\Users\23937\Downloads\mysql-8.0.29-winx64\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;"D:\apache-tomcat-8.5.34\bin;D:\apache-tomcat-8.5.34\lib";C:;C:\Users\23937\AppData\Roaming\nvm;C:\Program Files\nodejs;D:\pnpm\globalBinDir;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\MongoDB\Server\7.0\bin;C:\Program Files\MongoDB\mongosh-1.10.6-win32-x64\bin;%PNPM_HOME%;C:\Users\23937\AppData\Local\Microsoft\WindowsApps;D:\Program Files (x86)\JDK8\bin;C:\Program Files\Java\jdk1.8.0_311;C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin;D:\Program Files\IntelliJ IDEA 2021.2.3\bin;D:\Program Files\PyCharm 2021.2.3\bin;D:\Program Files\CLion 2021.2\bin;D:\Program Files\WebStorm 2021.2.3\bin;C:\Users\23937\.dotnet\tools;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Users\23937\AppData\Local\Programs\Fiddler;C:\Users\23937\AppData\Roaming\npm;D:\WebStorm 2023.1.2\bin;;D:\Microsoft VS Code\bin;D:\code\mysql-8.0.29-winx64\bin;D:\PyCharm 2022.2.3\bin;;C:\Users\23937\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\7.0\bin;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.18.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.npm.taobao.org/loadshEs: Not found
+      at Request.params.callback [as _callback] (C:\Users\23937\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:66145:18)
+      at Request.self.callback (C:\Users\23937\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:140890:22)
+      at Request.emit (node:events:513:28)
+      at Request.<anonymous> (C:\Users\23937\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:141862:10)
+      at Request.emit (node:events:513:28)
+      at IncomingMessage.<anonymous> (C:\Users\23937\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:141784:12)
+      at Object.onceWrapper (node:events:627:28)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1358:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "every-day",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "end": "node ./script/handleGit.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "simple-git": "^3.19.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
