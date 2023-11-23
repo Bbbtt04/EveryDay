@@ -1,0 +1,14 @@
+name: Github Actions Test
+
+on: push
+
+jobs: 
+  job1:
+    name: My first CI/CD
+    runs-on: ubuntu-latest
+    steps:
+      name: Print string
+      env: 
+        MY_NAME: wbt
+      run: |
+        echo $MY_NAME 的第一个github actions
