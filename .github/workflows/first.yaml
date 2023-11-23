@@ -7,7 +7,7 @@ jobs:
     name: My first CI/CD
     runs-on: ubuntu-latest
     steps:
-      name: Print string
+    - name: Print string
       env: 
         MY_NAME: wbt
       run: |
