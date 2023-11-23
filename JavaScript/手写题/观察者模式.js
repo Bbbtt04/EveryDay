@@ -1,28 +1,35 @@
 class Subject {
   constructor() {
-    this.observerList = []
+    this.observers = [];
   }
+
   addObserver(observer) {
-    this.observerList.push(observer)
+    this.observers.push(observer)
   }
+
   removeObserver(observer) {
-    const index = this.observerList.findIndex(o => o === observer)
-    this.observerList.splice(index, 1)
+    const index = this.observers.findIndex(o => o.name === observer.name);
+    this.observers.splice(index, 1);
   }
+
   notifyObservers(message) {
-    const observers = this.observerList
-    observers.forEach(observer => observer.notified(message))
+    this.observers.forEach(o => o.notify(message));
   }
 }
 
 class Observer {
   constructor(name, subject) {
-    this.name = name
-    if (subject) {
-      subject.addObserver(this)
-    }
+    this.name = name;
+    subject.addObserver(this);
   }
-  notified(message) {
-    console.log(this.name, ' message: ', message);
+
+  notify(message) {
+    console.log(this.name, " ", message);
   }
 }
+
+const subject = new Subject();
+const observer = new Observer('foo', subject);
+const observer2 = new Observer('bar', subject);
+
+subject.notifyObservers('Hello from subject');
