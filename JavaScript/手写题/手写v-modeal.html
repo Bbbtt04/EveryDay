@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+</head>
+
+<body>
+  <div>
+    <button id="btn">改变username</button>
+    <input type="text" id="input" />
+    <h1 id="name"></h1>
+  </div>
+</body>
+
+<script>
+  let person = {
+    username: "wbt"
+  }
+
+  watcher();
+
+  function watcher() {
+    Object.defineProperty(person, "username", {
+      set(value) {
+        updateDom(value);
+      },
+      get(value) {
+        return value;
+      }
+    })
+  }
+
+  function updateDom(value) {
+    console.log('updateDom', value);
+    document.querySelector('#name').innerHTML = value;
+  }
+  document.querySelector('#input').oninput = function (e) {
+    let value = e.target.value;
+    username = value;
+  }
+  document.querySelector('#btn').onclick = function (e) {
+    console.log("btn clicked");
+    person.username = "小明";
+  }
+</script>
+
+</html>
